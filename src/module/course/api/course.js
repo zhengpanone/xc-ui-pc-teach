@@ -20,8 +20,8 @@ export const addCourseBase = params => {
   return http.requestPost(apiUrl + '/course/coursebase/add', params)
 }
 /* 查询课程计划 */
-export const findTeachplanList = courseid => {
-  return http.requestQuickGet(apiUrl + '/course/teachPlan/list/' + courseid)
+export const findTeachplanList = courseId => {
+  return http.requestQuickGet(apiUrl + '/course/teachPlan/list/' + courseId)
 }
 /* 添加课程计划 */
 export const addTeachplan = teachplah => {

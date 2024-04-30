@@ -38,7 +38,7 @@
       return {
         active: 1,
         dotype:'',
-        courseid:'',
+        courseId:'',
         chargeList:[],
         validList:[],
         price_tag:false,
@@ -53,7 +53,7 @@
           endTime: '',
           users: '',
           expiration:[],
-          courseid:this.courseid
+          courseId:this.courseId
         },
         courseMarketFormRules: {
           free: [
@@ -70,13 +70,13 @@
         this.$refs.courseMarketForm.validate((valid) => {
           if (valid) {
             this.$confirm('确认提交吗？', '提示', {}).then(() => {
-              courseApi.updateCourseMarket(this.courseid,this.courseMarketForm).then((res) => {
+              courseApi.updateCourseMarket(this.courseId,this.courseMarketForm).then((res) => {
                this.editLoading = false;
                if(res.success){
                  this.$message.success('提交成功');
                  if(this.dotype == '1'){
                    //跳转到课程图片
-                   this.$router.push({ path: '/course/add/plan/3/1/'+this.courseid})
+                   this.$router.push({ path: '/course/add/plan/3/1/'+this.courseId})
                  }
                }else{
                  this.$message.error('提交失败');
@@ -91,9 +91,9 @@
         //操作类型
       this.dotype = this.$route.params.dotype;
       //课程id
-      this.courseid = this.$route.params.courseid;
+      this.courseId = this.$route.params.courseId;
 
-      this.courseMarketForm.id = this.courseid;
+      this.courseMarketForm.id = this.courseId;
       //查询字典
       systemApi.sys_getDictionary('203').then((res) => {
         this.chargeList = res.dvalue;
@@ -103,7 +103,7 @@
       });
 
       //获取课程营销信息
-      courseApi.getCourseMarketById(this.courseid).then((res) => {
+      courseApi.getCourseMarketById(this.courseId).then((res) => {
          //console.log(res);
         if(res && res.id){
            this.courseMarketForm = res;

@@ -46,7 +46,7 @@
     data() {
       return {
         dotype:'',
-        courseid:'',
+        courseId:'',
         studymodelList:[],
         gradeList:[],
         editLoading: false,
@@ -134,8 +134,8 @@
       });
       //查询课程信息
         //课程id
-        this.courseid = this.$route.params.courseid;
-         courseApi.getCoursebaseById(this.courseid).then((res) => {
+        this.courseId = this.$route.params.courseId;
+         courseApi.getCoursebaseById(this.courseId).then((res) => {
 //          console.log(res);
           this.courseForm = res;
           //课程分类显示，需要两级分类

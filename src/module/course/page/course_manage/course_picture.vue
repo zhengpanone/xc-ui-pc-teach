@@ -23,7 +23,7 @@
     data() {
       return {
         picmax:1,//最大上传文件的数量
-        courseid:'',
+        courseId:'',
         dialogImageUrl: '',
         dialogVisible: false,
         fileList:[],
@@ -46,7 +46,7 @@
         //调用服务端去删除课程图片信息，如果返回false，前端停止删除
         //异步调用
         return new Promise((resolve,rejct)=>{
-          courseApi.deleteCoursePic(this.courseid).then(res=>{
+          courseApi.deleteCoursePic(this.courseId).then(res=>{
             if(res.success){
 
                 //成功
@@ -69,7 +69,7 @@
         //从response得到新的图片文件的地址
         if(response.success){
           let fileId = response.fileSystem.fileId;
-          courseApi.addCoursePic(this.courseid,fileId).then(res=>{
+          courseApi.addCoursePic(this.courseId,fileId).then(res=>{
               if(res.success){
                   this.$message.success("上传图片")
               }else{
@@ -106,9 +106,9 @@
     },
     mounted(){
       //课程id
-      this.courseid = this.$route.params.courseid;
+      this.courseId = this.$route.params.courseId;
       //查询课程
-      courseApi.findCoursePicList(this.courseid).then(res=>{
+      courseApi.findCoursePicList(this.courseId).then(res=>{
           if(res && res.pic){
               let imgUrl = this.imgUrl+res.pic;
               //将图片地址设置到

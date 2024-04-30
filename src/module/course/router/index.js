@@ -18,17 +18,20 @@ export default [
     hidden: false,
     iconCls: 'el-icon-document',
     children: [
-      { path: '/course/list', name: '我的课程',component: course_list,hidden: false },
-      { path: '/course/add/base', name: '新增课程',component: course_add,hidden: true },
-      { path: '/course/manager/:courseid', name: '管理课程',component: course_manage,hidden: true ,
+      { path: '/course/list', name: '我的课程', component: course_list, hidden: false },
+      { path: '/course/add/base', name: '新增课程', component: course_add, hidden: true },
+      // eslint-disable-next-line object-property-newline
+      { path: '/course/manager/:courseId', name: '管理课程', component: course_manage, hidden: true,
         children: [
-          { path: '/course/manage/plan/:courseid', name: '课程计划',component: course_plan,hidden: false },
-          { path: '/course/manage/baseinfo/:courseid', name: '基本信息',component: course_baseinfo,hidden: false },
-          { path: '/course/manage/picture/:courseid', name: '课程图片',component: course_picture,hidden: false },
-          { path: '/course/manage/marketinfo/:courseid', name: '营销信息',component: course_marketinfo,hidden: false },
-          { path: '/course/manage/teacher/:courseid', name: '教师信息',component: course_teacher,hidden: false},
-          { path: '/course/manage/pub/:courseid', name: '发布课程',component: course_pub,hidden: false},
-          { path: '/course/manage/summary/:courseid', name: '课程首页',component: course_summary,hidden: false }
+          { path: '/course/manage/plan/:courseId', name: '课程计划', component: course_plan, hidden: false },
+          { path: '/course/manage/baseinfo/:courseId', name: '基本信息', component: course_baseinfo, hidden: false },
+          { path: '/course/manage/picture/:courseId', name: '课程图片', component: course_picture, hidden: false },
+          { path: '/course/manage/marketinfo/:courseId', name: '营销信息', component: course_marketinfo, hidden: false },
+
+          { path: '/course/manage/teacher/:courseId', name: '教师信息', component: course_teacher, hidden: false},
+          // eslint-disable-next-line standard/object-curly-even-spacing
+          { path: '/course/manage/pub/:courseId', name: '发布课程', component: course_pub, hidden: false},
+          { path: '/course/manage/summary/:courseId', name: '课程首页', component: course_summary, hidden: false }
         ]}
     ]
   }
