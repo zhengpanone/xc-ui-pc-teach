@@ -20,9 +20,9 @@
           <el-radio v-model="courseForm.grade" :label="grade.sdId" >{{grade.sdName}}</el-radio>&nbsp;&nbsp;
         </b>
       </el-form-item>
-      <el-form-item label="学习模式" prop="studymodel">
+      <el-form-item label="学习模式" prop="studyModel">
         <b v-for="studymodel_v in studymodelList">
-          <el-radio v-model="courseForm.studymodel" :label="studymodel_v.sdId" >{{studymodel_v.sdName}}</el-radio>&nbsp;&nbsp;
+          <el-radio v-model="courseForm.studyModel" :label="studymodel_v.sdId" >{{studymodel_v.sdName}}</el-radio>&nbsp;&nbsp;
         </b>
 
       </el-form-item>
@@ -60,7 +60,7 @@
           name: '',
           users: '',
           grade:'',
-          studymodel:'',
+          studyModel:'',
           mt:'',
           st:'',
           description: ''
@@ -90,7 +90,7 @@
            this.courseForm.mt=  this.categoryActive[0]//大分类
            this.courseForm.st=  this.categoryActive[1]//小分类
           courseApi.addCourseBase(this.courseForm).then(res=>{
-              if(res.success){
+              if(res.code===200){
                   this.$message.success("提交成功")
                 //跳转到我的课程
                 this.$router.push({ path: '/course/list'})
@@ -107,21 +107,26 @@
     mounted(){
       // 查询课程分类
       courseApi.categoryFindlist().then(res=>{
-          this.categoryList = res.children;
+        if(res.code===200){
+          this.categoryList = res.data.children;
           console.log(this.categoryList)
+        }
 
       })
 
       //查询数据字典
       //查询课程等级
-      systemApi.sys_getDictionary("200").then(res=>{
-
-        this.gradeList = res.dvalue;
+      systemApi.sysGetDictionary("200").then(res=>{
+        if(res.code===200){
+          this.gradeList = res.data.dvalue;
+        }
+        
       })
       //查询学习模式
-      systemApi.sys_getDictionary("201").then(res=>{
-
-        this.studymodelList = res.dvalue;
+      systemApi.sysGetDictionary("201").then(res=>{
+        if(res.code===200){
+        this.studymodelList = res.data.dvalue;
+      }
       })
 
     }

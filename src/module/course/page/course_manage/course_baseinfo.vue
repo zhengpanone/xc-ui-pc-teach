@@ -20,9 +20,9 @@
           <el-radio v-model="courseForm.grade" :label="grade.sdId" >{{grade.sdName}}</el-radio>&nbsp;&nbsp;
         </b>
       </el-form-item>
-      <el-form-item label="学习模式" prop="studymodel">
+      <el-form-item label="学习模式" prop="studyModel">
         <b v-for="studymodel_v in studymodelList">
-          <el-radio v-model="courseForm.studymodel" :label="studymodel_v.sdId" >{{studymodel_v.sdName}}</el-radio>&nbsp;&nbsp;
+          <el-radio v-model="courseForm.studyModel" :label="studymodel_v.sdId" >{{studymodel_v.sdName}}</el-radio>&nbsp;&nbsp;
         </b>
 
       </el-form-item>
@@ -62,7 +62,7 @@
           name: '',
           users: '',
           grade:'',
-          studymodel:'',
+          studyModel:'',
           mt:'',
           st:'',
           description: ''
@@ -77,7 +77,7 @@
           grade: [
             {required: true, message: '请选择课程等级', trigger: 'blur'}
           ],
-          studymodel: [
+          studyModel: [
             {required: true, message: '请选择学习模式', trigger: 'blur'}
           ]
 
@@ -98,7 +98,7 @@
                 let id = this.courseForm.id
                 courseApi.updateCoursebase(id,this.courseForm).then((res) => {
                   this.editLoading = false;
-                  if(res.success){
+                  if(res.code === 200){
                     this.$message({
                       message: '提交成功',
                       type: 'success'
@@ -121,23 +121,29 @@
     },
     mounted(){
       //查询数据字典字典
-      systemApi.sys_getDictionary('201').then((res) => {
-//        console.log(res);
-        this.studymodelList = res.dvalue;
+      systemApi.sysGetDictionary('201').then((res) => {
+        if(res.code ===200){
+          this.studymodelList = res.data.dvalue;
+        }
+        
       });
-      systemApi.sys_getDictionary('200').then((res) => {
-        this.gradeList = res.dvalue;
+      systemApi.sysGetDictionary('200').then((res) => {
+        if(res.code ===200){
+        this.gradeList = res.data.dvalue;
+      }
       });
       //取课程分类
       courseApi.categoryFindlist({}).then((res) => {
-        this.categoryList = res.children;
+        if(res.code ===200){
+        this.categoryList = res.data.children;
+      }
       });
       //查询课程信息
         //课程id
         this.courseId = this.$route.params.courseId;
          courseApi.getCoursebaseById(this.courseId).then((res) => {
 //          console.log(res);
-          this.courseForm = res;
+          this.courseForm = res.data;
           //课程分类显示，需要两级分类
           this.categoryActive.push(this.courseForm.mt);
           this.categoryActive.push(this.courseForm.st);

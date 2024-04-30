@@ -74,9 +74,9 @@
       getCourse() {
         courseApi.findCourseList(this.page,this.size,{}).then((res) => {
           console.log(res);
-          if(res.success){
-            this.total = res.queryResult.total;
-            this.courses = res.queryResult.list;
+          if(res.code===200){
+            this.total = res.data.total;
+            this.courses = res.data.list;
           }
 
         });
