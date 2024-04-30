@@ -106,7 +106,7 @@
     },
     mounted(){
       // 查询课程分类
-      courseApi.category_findlist().then(res=>{
+      courseApi.categoryFindlist().then(res=>{
           this.categoryList = res.children;
           console.log(this.categoryList)
 

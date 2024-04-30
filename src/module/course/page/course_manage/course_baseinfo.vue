@@ -129,7 +129,7 @@
         this.gradeList = res.dvalue;
       });
       //取课程分类
-      courseApi.category_findlist({}).then((res) => {
+      courseApi.categoryFindlist({}).then((res) => {
         this.categoryList = res.children;
       });
       //查询课程信息
